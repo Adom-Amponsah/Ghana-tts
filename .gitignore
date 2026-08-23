@@ -1,0 +1,25 @@
+# --- audio (never commit) ---
+*.wav
+*.mp3
+*.flac
+
+# --- pilot dataset (rebuildable via scripts/build_pilot_dataset.py) ---
+data/pilot/
+data/pilot_bundle.zip
+
+# --- downloaded dataset material ---
+data/shards/
+data/shards_pass2/
+data/manifests/all_durations.csv   # committed as .csv.gz instead
+*.parquet
+
+# --- Python environment ---
+.venv/
+__pycache__/
+*.pyc
+
+# --- temp / local state ---
+*.pkl
+*.incomplete
+*.lock
+~$*

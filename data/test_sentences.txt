@@ -1,0 +1,18 @@
+Ghanaian-English TTS evaluation sentences (pilot bake-off).
+Cover: place names, loanwords, currency, numbers, acronyms, questions.
+
+1. The President arrived in Accra late yesterday evening after a three-day visit to Kumasi.
+2. Thousands of commuters rely on trotros to travel between Circle and Tema every morning.
+3. The Ghana cedi gained slightly against the dollar following the Bank of Ghana announcement.
+4. Farmers in the Northern Region are expecting a good harvest of maize and yam this season.
+5. She bought kenkey and fried fish from the vendor near Cape Coast market.
+6. The Electoral Commission has confirmed that voter registration will begin next Monday.
+7. Road construction between Kasoa and Winneba has caused heavy traffic delays.
+8. The Black Stars will play their final group stage match at the Accra Sports Stadium.
+9. Waakye, jollof rice, and banku were served at the community festival in Tamale.
+10. The Minister of Finance presented the national budget to Parliament on Tuesday.
+11. How much does a bag of cocoa cost at the port in Takoradi?
+12. The University of Ghana hosted an international conference on renewable energy.
+13. Traders at Makola Market say prices of tomatoes and onions have fallen this week.
+14. The National Health Insurance Scheme is urging citizens to renew their cards before December.
+15. Heavy rains in the Volta Region have displaced hundreds of families, officials said.

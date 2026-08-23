@@ -1,0 +1,13 @@
+listen_order,wav_file,stratum,shard,duration_ss,mean_speech_prob,dbfs,corrected_text,auto_flags,reason,notes
+2,155_short_filtered-train-00066-of-00082_r1012.wav,short,filtered-train-00066-of-00082,5.24,0.9631,-19.9,don't come and take the concession for,abrupt_end;abrupt_start,,
+13,170_medium_filtered-train-00066-of-00082_r1020.wav,medium,filtered-train-00066-of-00082,9.2,0.9039,-21.9,days first 5 years a certain amount certain things to,abrupt_end,,
+14,168_medium_filtered-train-00066-of-00082_r1005.wav,medium,filtered-train-00066-of-00082,9.12,0.869,-20.84,act to act so he's acting okay all the other are acting,abrupt_end,,
+17,162_short_filtered-train-00066-of-00082_r3239.wav,short,filtered-train-00066-of-00082,3.56,0.9652,-20.57,140 women from different,possible_music,,
+25,138_medium_filtered-train-00045-of-00082_r1225.wav,medium,filtered-train-00045-of-00082,8.72,0.8568,-19.91,there to send it for me but now I'll start using mobile money again long process,abrupt_start,,
+26,135_short_filtered-train-00045-of-00082_r2005.wav,short,filtered-train-00045-of-00082,4.04,0.8672,-23.3,wholesale prices here,abrupt_start,,
+42,075_borderline_filtered-train-00002-of-00082_r1396.wav,borderline,filtered-train-00002-of-00082,12.44,0.8554,-24.27,have you g each and every your partner your M no anyone no I mean yeah no if you don't set the boundaries listen the profit margins on,abrupt_start,,
+52,051_medium_filtered-train-00002-of-00082_r3287.wav,medium,filtered-train-00002-of-00082,6.64,0.8877,-18.94,then the region should be honest and the best person to help him do,abrupt_end,,
+133,052_short_filtered-train-00002-of-00082_r3270.wav,short,filtered-train-00002-of-00082,4.32,0.8748,-17.58,before professional help arrived,,,
+146,108_medium_filtered-train-00024-of-00082_r1981.wav,medium,filtered-train-00024-of-00082,6.68,0.9794,-25.05,out to act if tuhey know wituhin tuheir uheart tuhat tuhey are not involved in tuhe galamsey,,,
+169,113_medium_filtered-train-00024-of-00082_r2795.wav,medium,filtered-train-00024-of-00082,8.04,0.8505,-20.83,"were surprised whaten they were sitting on the ground there. Honorable whaten we went there at seven, they had disappeared.",,,
+185,149_borderline_filtered-train-00045-of-00082_r2903.wav,borderline,filtered-train-00045-of-00082,14.8,0.8519,-23.43,as I said of trying to resolve this uh this mattrather maybe once and for all since evratherybody seems to have their pink sheet and the EC alawyratherso has his pinkg sheet but it appear it appears to me that the the only way out hrathere is through the courts,,,
