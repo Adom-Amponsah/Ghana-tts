@@ -64,14 +64,16 @@ wavtokenizer = WavTokenizer.from_pretrained0802(WAVTOK_CONFIG, WAVTOK_MODEL)
 wavtokenizer = wavtokenizer.to(device)
 print("  Done.")
 
-# Load metadata
+# Load metadata — format: audio_file|text (pipe-delimited, with header)
 print(f"Loading metadata from {METADATA_CSV}...")
-meta = pd.read_csv(METADATA_CSV)
+meta = pd.read_csv(METADATA_CSV, sep="|")
 print(f"  {len(meta)} clips in metadata")
+print(f"  Columns: {list(meta.columns)}")
 
-# Check which WAVs exist
-meta["wav_path"] = meta["wav_file"].apply(lambda f: WAV_DIR / f)
-meta = meta[meta["wav_path"].apply(lambda p: p.exists())].reset_index(drop=True)
+# The audio_file column has full paths like /workspace/ghana_pilot/wav/pl_00000_...wav
+# Use them directly
+meta["wav_path"] = meta["audio_file"]
+meta = meta[meta["wav_path"].apply(lambda p: os.path.exists(p))].reset_index(drop=True)
 print(f"  {len(meta)} clips have WAV files on disk")
 
 # ---------------------------------------------------------------------------
@@ -86,7 +88,7 @@ t0 = time.time()
 
 for idx, row in tqdm(meta.iterrows(), total=len(meta), desc="Tokenizing"):
     wav_path = str(row["wav_path"])
-    text = str(row["corrected_text"])
+    text = str(row["text"])
 
     try:
         # Load audio
@@ -95,7 +97,7 @@ for idx, row in tqdm(meta.iterrows(), total=len(meta), desc="Tokenizing"):
 
         # Skip if too short or corrupt
         if audio_data.numel() < sr * 1.0:
-            errors.append((row["wav_file"], "too_short"))
+            errors.append((os.path.basename(wav_path), "too_short"))
             continue
 
         # Resample to 24kHz
@@ -112,13 +114,13 @@ for idx, row in tqdm(meta.iterrows(), total=len(meta), desc="Tokenizing"):
 
         # Skip if no codes
         if len(code_list) == 0:
-            errors.append((row["wav_file"], "no_codes"))
+            errors.append((os.path.basename(wav_path), "no_codes"))
             continue
 
         # Process text
         words = process_text(text)
         if len(words) == 0:
-            errors.append((row["wav_file"], "empty_text"))
+            errors.append((os.path.basename(wav_path), "empty_text"))
             continue
 
         # Build training string
@@ -137,14 +139,13 @@ for idx, row in tqdm(meta.iterrows(), total=len(meta), desc="Tokenizing"):
         results.append({
             "0": training_string,
             "length": len(training_string),
-            "wav_file": row["wav_file"],
+            "wav_file": os.path.basename(wav_path),
             "n_codes": len(code_list),
             "n_words": len(words),
-            "duration_ss": row.get("duration_ss", 0),
         })
 
     except Exception as e:
-        errors.append((row["wav_file"], str(e)[:100]))
+        errors.append((os.path.basename(wav_path), str(e)[:100]))
         continue
 
 elapsed = time.time() - t0
