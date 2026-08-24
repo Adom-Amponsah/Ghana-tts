@@ -40,7 +40,7 @@ echo "ref text : ${REF_TEXT:0:80}..."
 echo "ckpt     : $SRC"
 echo "vocab    : $VOCAB"
 
-OUT=/workspace/gen/step_${STEP}
+OUT=/workspace/gen/step_${STEP}_speed030
 mkdir -p "$OUT"
 i=0
 # skip the 2 header lines, strip the "N. " numbering
@@ -56,7 +56,8 @@ tail -n +3 /workspace/ghana_pilot/test_sentences.txt | sed 's/^[0-9]*\. //' | wh
         --ref_text "$REF_TEXT" \
         --gen_text "$sentence" \
         --output_dir "$OUT" \
-        --output_file "sent_$(printf '%02d' $i).wav" || echo "  [!] generation failed for sentence $i"
+        --output_file "sent_$(printf '%02d' $i).wav" \
+        --speed 0.30 || echo "  [!] generation failed for sentence $i"
 done
 
 echo
