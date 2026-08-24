@@ -55,7 +55,8 @@ tail -n +3 /workspace/ghana_pilot/test_sentences.txt | sed 's/^[0-9]*\. //' | wh
         --ref_audio "$REF_WAV" \
         --ref_text "$REF_TEXT" \
         --gen_text "$sentence" \
-        --output_dir "$OUT" || echo "  [!] generation failed for sentence $i"
+        --output_dir "$OUT" \
+        --output_file "sent_$(printf '%02d' $i).wav" || echo "  [!] generation failed for sentence $i"
 done
 
 echo
