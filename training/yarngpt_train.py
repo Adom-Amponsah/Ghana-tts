@@ -34,9 +34,9 @@ TRAIN_CSV = "/workspace/yarngpt_train_data.csv"
 OUTPUT_DIR = "/workspace/yarngpt_ghana"
 
 BATCH_SIZE = 4
-LEARNING_RATE = 1e-3
+LEARNING_RATE = 5e-5
 NUM_EPOCHS = 5
-WARMUP_STEPS = 50
+WARMUP_STEPS = 100
 SAVE_EVERY = 500  # save checkpoint every N steps
 LOG_EVERY = 25
 
@@ -95,7 +95,7 @@ model.resize_token_embeddings(len(tokenizer))
 print(f"  Resized embeddings to: {model.config.vocab_size}")
 print(f"  New params: {model.num_parameters():,}")
 
-model = torch.compile(model)
+# Skip torch.compile — can cause instability with small models + custom tokens
 model.train()
 
 # ---------------------------------------------------------------------------
@@ -184,9 +184,16 @@ for epoch in range(NUM_EPOCHS):
         attention_mask = batch["attention_mask"].to(device)
         labels = input_ids.clone()
 
-        with torch.amp.autocast(device_type="cuda", dtype=torch.float16):
+        with torch.amp.autocast(device_type="cuda", dtype=torch.bfloat16):
             outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
             loss = outputs.loss
+
+        if torch.isnan(loss) or torch.isinf(loss):
+            print(f"  [WARNING] NaN/Inf loss at step {global_step}, skipping batch")
+            optimizer.zero_grad()
+            global_step += 1
+            scheduler.step()
+            continue
 
         optimizer.zero_grad()
         loss.backward()
